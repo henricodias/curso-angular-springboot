@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/todos") //mapeia a URL para a qual serão feitas as requisições da API
+@CrossOrigin("http://localhost:4200")
 public class TodoController {
 
     @Autowired
@@ -17,6 +20,11 @@ public class TodoController {
     @PostMapping
     public Todo save(@RequestBody Todo todo) {
         return todoRepository.save(todo);
+    }
+    
+    @GetMapping
+    public List<Todo> getAll(){
+        return todoRepository.findAll();
     }
 
     // url/api/todos/1
