@@ -21,7 +21,7 @@ public class TodoController {
     public Todo save(@RequestBody Todo todo) {
         return todoRepository.save(todo);
     }
-    
+
     @GetMapping
     public List<Todo> getAll(){
         return todoRepository.findAll();
@@ -31,5 +31,10 @@ public class TodoController {
     @GetMapping("{id}")
     public Todo getById(@PathVariable Long id) {
         return todoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
+        todoRepository.deleteById(id);
     }
 }

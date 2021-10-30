@@ -20,6 +20,10 @@ export class AppComponent implements OnInit {
   ) {  }
 
   ngOnInit(){
+    this.listarTodos()
+  }
+
+  listarTodos(){
     this.service.listar().subscribe(todoList => {
       console.log(todoList)
       this.todos = todoList
@@ -34,5 +38,11 @@ export class AppComponent implements OnInit {
           this.todos.push(savedTodo)
           this.form.reset()
         })
+  }
+
+  delete(todo: Todo){
+    this.service.deletar(todo.id).subscribe({
+      next: (response) => this.listarTodos()
+    })
   }
 }
