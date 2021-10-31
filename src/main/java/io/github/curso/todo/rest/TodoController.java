@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -36,5 +37,15 @@ public class TodoController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         todoRepository.deleteById(id);
+    }
+
+    @PatchMapping("{id}/done")
+    public Todo markAsDone(@PathVariable Long id) {
+        return todoRepository.findById(id).map(todo -> {
+            todo.setDone(true);
+            todo.setDoneDate(LocalDateTime.now());
+            todoRepository.save(todo);
+            return todo;
+        }).orElse(null);
     }
 }

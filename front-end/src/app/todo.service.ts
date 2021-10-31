@@ -27,4 +27,8 @@ export class TodoService {
     return this.http.delete<void>(url)
   }
 
+  marcarComoConcluido(todo: Todo) : Observable<Todo> {
+    const url = `${this.apiURL}/${todo.id}/done`
+    return this.http.patch<Todo>(url, {})
+  }
 }

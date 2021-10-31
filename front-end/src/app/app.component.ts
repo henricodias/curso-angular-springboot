@@ -45,4 +45,13 @@ export class AppComponent implements OnInit {
       next: (response) => this.listarTodos()
     })
   }
+
+  done(todo: Todo) {
+    this.service.marcarComoConcluido(todo).subscribe({
+      next: (todoAtualizado) => {
+        todo.done = todoAtualizado.done
+        todo.doneDate = todoAtualizado.doneDate 
+      }
+    })
+  }
 }
