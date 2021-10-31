@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   delete(todo: Todo){
-    this.service.deletar(todo.id).subscribe({
+    this.service.deletar(todo).subscribe({
       next: (response) => this.listarTodos()
     })
   }
